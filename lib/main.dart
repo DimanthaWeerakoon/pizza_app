@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pizza_app/screens/authentication/login.dart';
-import 'package:pizza_app/screens/authentication/signup.dart';
-import 'package:pizza_app/shop/shop_page.dart';
 
 void main() {
   runApp(const MyApp());

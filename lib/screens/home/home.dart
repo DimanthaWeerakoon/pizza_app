@@ -1,15 +1,17 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(244, 7, 10, 31),
       appBar: AppBar(
         // toolbarHeight: 100,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: const Color.fromARGB(244, 7, 10, 31),
         leading: Container(
           // height: 10,
           width: 10,
@@ -44,21 +46,26 @@ class HomePageScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 10),
-              Container(
-                height: 200,
-                width: 400,
-                decoration: BoxDecoration(
-                  image: const DecorationImage(
-                    image: AssetImage('assets/pizza.jpg'),
-                    fit: BoxFit.cover,
+              Stack(
+                children: [
+                  Container(
+                    height: 200,
+                    width: 400,
+                    decoration: BoxDecoration(
+                      image: const DecorationImage(
+                        image: AssetImage('assets/pizza.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Positioned(
-                  top: 20,
-                  child: Container(
+                  Positioned(
+                    top: 20,
+                    child: Container(
                       padding: const EdgeInsets.all(20),
                       height: 200,
+                      width:
+                          400, // Adjust the width to match the outer container
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
@@ -69,30 +76,49 @@ class HomePageScreen extends StatelessWidget {
                                 .withOpacity(0.5),
                           ],
                         ),
-                      )),
-                ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 20,
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "Meal Category",
                     style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    ),
                   ),
-                  TextButton(
-                      child: const Text("View All",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15)),
-                      onPressed: () {}),
                 ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: 50, // Adjust the height as needed
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(12),
+                  // itemCount: 5,
+                  itemBuilder: (context, value) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        elevatedButton(1, "Breakfast"),
+                        elevatedButton(2, "Lunch"),
+                        elevatedButton(3, "Dinner"),
+                        elevatedButton(4, "Short Eats"),
+                        elevatedButton(4, "Pizza Special"),
+                      ],
+                    );
+                  },
+                  scrollDirection: Axis.horizontal,
+                ),
               ),
               const SizedBox(
                 height: 20,
@@ -105,13 +131,30 @@ class HomePageScreen extends StatelessWidget {
                   populerDestination('assets/2img.jpg',
                       'Lorem Ipsum dolor sal amet', 'Lorem ipsum'),
                 ],
-              )
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
+  Widget elevatedButton(int value, String text) => Row(
+        children: [
+          ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black.withOpacity(0.5),
+                  foregroundColor: Colors.white),
+              child: Text(
+                text,
+                style: const TextStyle(color: Colors.white),
+              )),
+          const SizedBox(
+            width: 10,
+          ),
+        ],
+      );
 
   Widget populerDestination(String img, String city, String country) {
     return Container(
